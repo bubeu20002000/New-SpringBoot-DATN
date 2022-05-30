@@ -102,6 +102,10 @@ public class OrderController {
 			orderProduct2.setStatus(1);
 			orderProduct2.setOrder(_Order);
 			orderProdRepo.save(orderProduct2);
+
+			Product product = orderProduct2.getProduct();
+			product.setProdinstock(product.getProdinstock() - orderProduct2.getQuantity());
+			productRepo.save(product);
 		}
 
 //		orderRepo.deleteByStatusAndUserId(0, id);
@@ -114,9 +118,9 @@ public class OrderController {
 		return new ResponseEntity<>(order, HttpStatus.OK);
 	}
 	
-	@GetMapping("/get-prod-order/{id}")
-	public ResponseEntity<?> getProdOrderbyId(@PathVariable("id") Long id) {
-		List<OrderProduct> orderProducts = orderProdRepo.findByOrderId(id);
+	@GetMapping("/get-prod-order/{oid}")
+	public ResponseEntity<?> getProdOrderbyId(@PathVariable("oid") Long oid) {
+		List<OrderProduct> orderProducts = orderProdRepo.findByOrderId(oid);
 		return new ResponseEntity<>(orderProducts, HttpStatus.OK);
 	}
 	
