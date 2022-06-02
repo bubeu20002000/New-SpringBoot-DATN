@@ -47,6 +47,8 @@ public class Product {
 	private String prodimg1;
 	@Column(name = "prod_img2")
 	private String prodimg2;
+	@Column(name = "prod_discount", nullable = false)
+	private int proddiscount;
 	@ManyToOne
 	private Category categories;
 	

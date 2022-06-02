@@ -12,13 +12,17 @@ import com.example.login.model.OrderProduct;
 
 public interface OrderProdRepo extends JpaRepository<OrderProduct, Long>{
 	List<OrderProduct> findByStatusAndOrderUserId(int status,Long id);
+	
 	List<OrderProduct> findByOrderId(Long id);
+	
 	@Transactional
 	@Modifying
 	void deleteByProductId(Long id);
+	
 	@Transactional
 	@Modifying
 	void deleteByOrderId(Long id);
+	
 	@Transactional
 	@Modifying
 	@Query(value = "update shop.order_products set status = 1 where status = 0",nativeQuery = true)

@@ -54,7 +54,6 @@ public class ProductController {
 		
 		List<Product> output = new ArrayList<>();
 
-		
 		if (productRequest == null) {
 			products = productRepo.findAll();
 		} else {
@@ -66,6 +65,7 @@ public class ProductController {
 		
 		HashSet<Object> seen=new HashSet<>();
 		products.removeIf(c -> !seen.add(Arrays.asList(c.getSku())));
+		
 		int total = products.size();
 		int start = (int)paging.getOffset();
 		int end = Math.min((start + paging.getPageSize()), total);
@@ -87,12 +87,22 @@ public class ProductController {
 		return productRepo.findById(id);
 	}
 	
-	@GetMapping("/product-details-sku/{sku}")
+	@GetMapping("/product-sizes-sku/{sku}")
 	public Map<String, String> getSizes(@PathVariable("sku") String sku){
 		Map<String, String> response = new HashMap<>();
 		List<String> data =  productRepo.customQuery(sku);
 		for (int i=0;i<data.size();i++) {
 			response.put(data.get(i).split(",")[0], data.get(i).split(",")[1]);
+		}
+		return response;
+	}
+	
+	@GetMapping("/product-price-sku/{sku}")
+	public Map<String, String> getPrice(@PathVariable("sku") String sku){
+		Map<String, String> response = new HashMap<>();
+		List<String> data =  productRepo.customQuery2(sku);
+		for (int i=0;i<data.size();i++) {
+			response.put(data.get(i).split(",")[0], data.get(i).split(",")[1]+","+data.get(i).split(",")[2]);
 		}
 		return response;
 	}
