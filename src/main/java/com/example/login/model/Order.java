@@ -61,10 +61,6 @@ public class Order {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-//	@ManyToMany
-//	@JoinColumn(name = "prod_id")
-//	private List<Product> products;
-
 	public Order(String name, String company, String address1, String address2, String city, String district,
 			String ward, String zipcode, String phone, String email, String date, String note, double total, int status,
 			int paymentmethod, User user) {

@@ -50,29 +50,24 @@ public class User {
 	@Column(unique = true)
 	private String passtoken;
 
-//	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-//	private Cart cart;
-
 	public User() {
 		super();
 	}
 
-public User( @NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email,
-		@NotBlank @Size(max = 120) String password, Set<Role> roles, String phone_number, String address_1, String city,
-		String district, String ward, String passtoken) {
-	super();
-	this.username = username;
-	this.email = email;
-	this.password = password;
-	this.roles = roles;
-	this.phone_number = phone_number;
-	this.address_1 = address_1;
-	this.city = city;
-	this.district = district;
-	this.ward = ward;
-	this.passtoken = passtoken;
-}
-
-	
+	public User(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email,
+			@NotBlank @Size(max = 120) String password, Set<Role> roles, String phone_number, String address_1,
+			String city, String district, String ward, String passtoken) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
+		this.phone_number = phone_number;
+		this.address_1 = address_1;
+		this.city = city;
+		this.district = district;
+		this.ward = ward;
+		this.passtoken = passtoken;
+	}
 
 }
