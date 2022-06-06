@@ -35,4 +35,10 @@ public interface OrderRepo extends JpaRepository<Order, Long> {
 	
 	@Query(value = "select * from orders o where o.status = 2", nativeQuery = true)
 	List<Order> listofOrdersDone();
+	
+	@Query(value = "select sum(o.total) from orders o", nativeQuery = true)
+	String sumTotal();
+	
+	@Query(value = "select sum(o.total) from orders o where substring_index(substring_index(o.date,'-',2),'-',-1) = ?1 and o.status = 2", nativeQuery = true)
+	String sumMonthly(String month);
 }

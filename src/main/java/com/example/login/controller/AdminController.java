@@ -44,15 +44,17 @@ public class AdminController {
 	@Autowired
 	private CategoryRepo categoryRepo;
 
-	@GetMapping("/count")
+	@GetMapping("/count/{month}")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<Map<String, String>> getCountInfo() {
+	public ResponseEntity<Map<String, String>> getCountInfo(@PathVariable String month) {
 		Map<String, String> response = new HashMap<String, String>();
 		response.put("CountProds", productRepo.countProds());
 		response.put("CountProds_OutOfStock", productRepo.countProds_OutOfStock());
 		response.put("CountOrders", orderRepo.countOrders());
 		response.put("CountOrders_NotFinish", orderRepo.countOrdersNotDone());
 		response.put("CountUsers", userRepo.countUsers());
+		response.put("SumTotal", orderRepo.sumTotal());
+		response.put("SumMonthly", orderRepo.sumMonthly(month));
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
