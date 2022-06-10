@@ -31,18 +31,18 @@ public class Product {
 	private String prodname;
 	@Column(name = "prod_type", nullable = false)
 	private String prodtype;
+	@Column(name = "prod_color", nullable = false)
+	private String prodcolor;
 	@Column(name = "prod_size", nullable = false)
 	private String prodsize;
-	@Column(name = "prod_description")
-	private String proddescription;
 	@Column(name = "prod_instock", nullable = false)
 	private int prodinstock;
 	@Column(name = "prod_price", nullable = false)
 	private double prodprice;
 	@Column(name = "prod_status", nullable = false)
 	private Boolean prodstatus;
-	@Column(name = "prod_color", nullable = false)
-	private String prodcolor;
+	@Column(name = "prod_description")
+	private String proddescription;
 	@Column(name = "prod_img1")
 	private String prodimg1;
 	@Column(name = "prod_img2")

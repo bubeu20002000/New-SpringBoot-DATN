@@ -58,10 +58,21 @@ public class AdminController {
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
-	@GetMapping("/user")
+	@GetMapping("/user/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<List<User>> getListOfUsers() {
-		return new ResponseEntity<>(userRepo.findAll(), HttpStatus.OK);
+	public ResponseEntity<List<User>> getListOfUsers(@PathVariable Long id) {
+		return new ResponseEntity<>(userRepo.findAll(id), HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/delete_user/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long id) {
+		try {
+			userRepo.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@GetMapping("/product")
@@ -150,5 +161,7 @@ public class AdminController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	
 
 }

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 //import org.springframework.data.jpa.repository.Modifying;
 //import org.springframework.data.jpa.repository.Query;
 //import org.springframework.data.repository.query.Param;
@@ -29,6 +30,6 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	@Query(value = "select count(u.id) from shop.users u inner join shop.user_roles ul on u.id = ul.user_id where ul.role_id = 1; ",nativeQuery = true)
 	String countUsers();
 	
-	@Query(value = "select * from shop.users u inner join shop.user_roles ul on u.id = ul.user_id where ul.role_id = 1; ",nativeQuery = true)
-	List<User> findAll();
+	@Query(value = "select * from shop.users u where u.id <> :id ;",nativeQuery = true)
+	List<User> findAll(@Param("id") Long id);
 }
